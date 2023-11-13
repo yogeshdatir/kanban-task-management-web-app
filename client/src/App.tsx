@@ -1,14 +1,17 @@
+import { DashboardContainer, RightContainer } from './App.styled';
 import Content from './components/Content';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 
 const App = () => {
   return (
-    <div>
+    <DashboardContainer>
       <Sidebar />
-      <Header />
-      <Content />
-    </div>
+      <RightContainer>
+        <Header />
+        <Content />
+      </RightContainer>
+    </DashboardContainer>
   );
 };
 
