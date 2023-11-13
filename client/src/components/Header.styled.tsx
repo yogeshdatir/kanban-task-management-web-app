@@ -10,6 +10,7 @@ export const HeaderContainer = styled.div`
   .dropdown-icon-wrapper {
     padding: 0 8px;
     cursor: pointer;
+    height: 20px;
   }
 `;
 
