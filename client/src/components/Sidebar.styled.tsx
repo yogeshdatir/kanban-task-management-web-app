@@ -36,9 +36,13 @@ export const SidebarContainer = styled.div`
   .menu-item {
     padding: 15px 0 15px 32px;
     cursor: pointer;
+    border-radius: 0px 100px 100px 0px;
+
+    :hover {
+      background: var(--main-purple-hover, #a8a4ff);
+    }
 
     &.selected {
-      border-radius: 0px 100px 100px 0px;
       background: var(--Main-Purple, #635fc7);
     }
   }
