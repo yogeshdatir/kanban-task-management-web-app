@@ -4,7 +4,7 @@ import dummyBoards from '../../data.json';
 
 const initialState: TBoards = {
   boards: dummyBoards.boards,
-  selectedBoard: dummyBoards.boards[0].name,
+  selectedBoardName: dummyBoards.boards[0].name,
 };
 
 const boardSlice = createSlice({
@@ -12,7 +12,7 @@ const boardSlice = createSlice({
   initialState,
   reducers: {
     selectBoard: (state, action) => {
-      state.selectedBoard = action.payload;
+      state.selectedBoardName = action.payload;
       return state;
     },
     addBoard: (state, action) => {

@@ -1,6 +1,6 @@
 export type TBoards = {
   boards: TBoard[];
-  selectedBoard: string;
+  selectedBoardName: string;
 };
 
 export type TBoard = {

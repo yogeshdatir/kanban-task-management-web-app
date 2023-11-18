@@ -6,7 +6,7 @@ import { AppState } from '../react-redux/store';
 import { selectBoard } from '../react-redux/boardSlice';
 
 const Sidebar = () => {
-  const { boards, selectedBoard } = useSelector((state: AppState) => {
+  const { boards, selectedBoardName } = useSelector((state: AppState) => {
     return state.boardsState;
   });
   const dispatch = useDispatch();
@@ -17,12 +17,12 @@ const Sidebar = () => {
         <KanBanLogo />
       </div>
       <div className="menu-container">
-        <span className="menu-header">all boards (8)</span>
+        <span className="menu-header">{`all boards (${boards.length})`}</span>
         {boards.map((board: TBoard) => {
           return (
             <a
               className={`menu-item${
-                selectedBoard === board.name ? ' selected' : ''
+                selectedBoardName === board.name ? ' selected' : ''
               }`}
               key={board.name}
               onClick={() => {
@@ -33,10 +33,7 @@ const Sidebar = () => {
             </a>
           );
         })}
-        {/* <a className="menu-item selected">Platform Launch</a>
-        <a className="menu-item">Marketing Plan</a>
-        <a className="menu-item">Roadmap</a>
-        <a className="menu-action-button">+ Create New Board</a> */}
+        <a className="menu-action-button">+ Create New Board</a>
       </div>
     </SidebarContainer>
   );
