@@ -1,4 +1,4 @@
-import { Droppable, DroppableProvided } from 'react-beautiful-dnd';
+import { Droppable, DroppableProvided } from '@hello-pangea/dnd';
 import { TColumn, TTask } from '../types';
 import { ColumnContainer, ColumnTitle, TaskList } from './Column.styled';
 import Task from './Task';

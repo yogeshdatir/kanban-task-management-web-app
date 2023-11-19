@@ -1,26 +1,32 @@
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from '@hello-pangea/dnd';
 import {
   BoardContainer,
   ContentContainer,
   EmptyStateContainer,
 } from './Content.styled';
 import { PrimaryBtn } from './Header.styled';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../react-redux/store';
 import { TBoard, TColumn } from '../types';
 import Column from './Column';
+import { updateTaskList } from '../react-redux/boardSlice';
 
 const Content = () => {
   const { boards, selectedBoardName } = useSelector((state: AppState) => {
     return state.boardsState;
   });
 
+  const dispatch = useDispatch();
+
   const selectedBoard: TBoard | undefined = boards.find(
     (board: TBoard) => board.name === selectedBoardName
   );
 
-  const onDragEnd = () => {
+  const onDragEnd = (result: DropResult) => {
     // It is the responsibility of this responder to synchronously apply changes that has resulted from the drag
+
+    if (!result.destination) return;
+    dispatch(updateTaskList(result));
   };
 
   return (

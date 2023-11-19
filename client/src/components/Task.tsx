@@ -1,4 +1,4 @@
-import { Draggable, DraggableProvided } from 'react-beautiful-dnd';
+import { Draggable, DraggableProvided } from '@hello-pangea/dnd';
 import { TTask } from '../types';
 import { TaskContainer, SubTaskDetails, TaskTitle } from './Task.styled';
 
