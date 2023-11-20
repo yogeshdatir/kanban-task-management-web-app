@@ -3,6 +3,7 @@ import {
   BoardContainer,
   ContentContainer,
   EmptyStateContainer,
+  NewColumn,
 } from './Content.styled';
 import { PrimaryBtn } from './Header.styled';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,6 +38,9 @@ const Content = () => {
             {selectedBoard.columns.map((column: TColumn) => {
               return <Column key={column.name} column={column} />;
             })}
+            <NewColumn>
+              <p>+ New Column</p>
+            </NewColumn>
           </BoardContainer>
         ) : (
           <EmptyStateContainer>

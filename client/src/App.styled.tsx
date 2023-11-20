@@ -10,4 +10,5 @@ export const RightContainer = styled.div`
   flex-direction: column;
   flex: 1;
   height: 100%;
+  width: 79%;
 `;

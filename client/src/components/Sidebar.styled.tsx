@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const SidebarContainer = styled.div`
-  width: 20.83%;
+  width: 21%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -10,8 +10,8 @@ export const SidebarContainer = styled.div`
 
   .logo-container {
     height: 96px;
+    padding-left: 32px;
     display: flex;
-    justify-content: center;
     align-items: center;
   }
 
@@ -38,8 +38,10 @@ export const SidebarContainer = styled.div`
     cursor: pointer;
     border-radius: 0px 100px 100px 0px;
 
-    :hover {
-      background: var(--main-purple-hover, #a8a4ff);
+    :hover:not(&.selected) {
+      border-radius: 0px 100px 100px 0px;
+      background: var(--White, #fff);
+      color: var(--Main-Purple, #635fc7);
     }
 
     &.selected {

@@ -13,4 +13,6 @@ export const TaskList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-height: calc(100% - 48px);
+  overflow: auto;
 `;
