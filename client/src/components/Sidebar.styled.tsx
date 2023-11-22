@@ -47,6 +47,8 @@ export const SidebarContainer = styled.div`
     &.selected {
       background: var(--Main-Purple, #635fc7);
     }
+
+    transition: all 0.2s ease-in-out;
   }
 
   .menu-action-button {

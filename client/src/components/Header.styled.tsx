@@ -21,4 +21,10 @@ export const PrimaryBtn = styled.button`
 
   border-radius: 24px;
   background: var(--Main-Purple, #635fc7);
+
+  :hover {
+    background: var(--main-purple-hover, #a8a4ff);
+  }
+
+  transition: all 0.2s ease-in-out;
 `;
