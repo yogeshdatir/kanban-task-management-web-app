@@ -49,7 +49,7 @@ const Sidebar = () => {
       </div>
       {showFormModal && (
         <PopupModal>
-          <BoardForm />
+          <BoardForm setShowFormModal={setShowFormModal} />
         </PopupModal>
       )}
     </SidebarContainer>

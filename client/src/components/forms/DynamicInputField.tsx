@@ -17,7 +17,10 @@ const DynamicRowComp = ({
   return (
     <DynamicRow>
       <Input type="text" />
-      <CrossIcon onClick={() => updateColumnCounter(-1)} />
+      <CrossIcon
+        style={{ cursor: 'pointer' }}
+        onClick={() => updateColumnCounter(-1)}
+      />
     </DynamicRow>
   );
 };

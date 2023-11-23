@@ -1,9 +1,13 @@
 import { PrimaryBtn } from '../Header.styled';
 import DynamicInputField from './DynamicInputField';
-import { FormContainer } from './Form.styled';
+import { ActionRow, FormContainer } from './Form.styled';
 import InputField from './InputField';
 
-const BoardForm = () => {
+type Props = {
+  setShowFormModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const BoardForm = ({ setShowFormModal }: Props) => {
   return (
     <FormContainer>
       <p>Add new board</p>
@@ -16,7 +20,16 @@ const BoardForm = () => {
         }}
       />
       <DynamicInputField />
-      <PrimaryBtn>Create New Board</PrimaryBtn>
+      <ActionRow>
+        <PrimaryBtn>Submit</PrimaryBtn>
+        <PrimaryBtn
+          onClick={() => {
+            setShowFormModal(false);
+          }}
+        >
+          Cancel
+        </PrimaryBtn>
+      </ActionRow>
     </FormContainer>
   );
 };
