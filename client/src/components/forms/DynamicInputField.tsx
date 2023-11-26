@@ -8,15 +8,18 @@ import {
 import CrossIcon from '../../../assets/icon-cross.svg?react';
 import { PrimaryBtn } from '../Header.styled';
 import { useState } from 'react';
+import { InputFieldProps } from './InputField';
 
 const DynamicRowComp = ({
   updateColumnCounter,
+  inputProps,
 }: {
   updateColumnCounter: (change: number) => void;
+  inputProps?: InputFieldProps['inputProps'];
 }) => {
   return (
     <DynamicRow>
-      <Input type="text" />
+      <Input type="text" {...inputProps} />
       <CrossIcon
         style={{ cursor: 'pointer' }}
         onClick={() => updateColumnCounter(-1)}
@@ -25,7 +28,13 @@ const DynamicRowComp = ({
   );
 };
 
-const DynamicInputField = () => {
+type Props = {
+  label?: string;
+  allInputProps?: InputFieldProps['inputProps'][];
+  addRowBtnText?: string;
+};
+
+const DynamicInputField = ({ label, allInputProps, addRowBtnText }: Props) => {
   const [columnCounter, setColumnCounter] = useState(1);
 
   const updateColumnCounter = (change: number) => {
@@ -38,13 +47,19 @@ const DynamicInputField = () => {
 
   return (
     <DynamicInputFieldWrapper>
-      <FieldLabel>Board Columns</FieldLabel>
+      <FieldLabel>{label}</FieldLabel>
       <DynamicRowsWrapper>
-        {[...Array(columnCounter)].map(() => {
-          return <DynamicRowComp updateColumnCounter={updateColumnCounter} />;
+        {[...Array(columnCounter)].map((_, index: number) => {
+          return (
+            <DynamicRowComp
+              key={index}
+              updateColumnCounter={updateColumnCounter}
+              inputProps={allInputProps && allInputProps[index]}
+            />
+          );
         })}
         <PrimaryBtn onClick={() => updateColumnCounter(1)}>
-          + Add New Column
+          {addRowBtnText}
         </PrimaryBtn>
       </DynamicRowsWrapper>
     </DynamicInputFieldWrapper>

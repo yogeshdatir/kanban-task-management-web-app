@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 export const FormContainer = styled.div`
@@ -15,12 +16,16 @@ export const FieldLabel = styled.label`
   gap: 8px;
 `;
 
-export const Input = styled.input`
+const sharedStyles = css`
   border-radius: 4px;
   border: 1px solid rgba(130, 143, 163, 0.25);
   background: var(--Dark-Grey, #2b2c37);
   padding: 0.5rem 1rem;
   width: 100%;
+`;
+
+export const Input = styled.input`
+  ${sharedStyles}
 `;
 
 export const DynamicInputFieldWrapper = styled.div`
@@ -57,4 +62,8 @@ export const ActionRow = styled.div`
   button {
     flex: 1;
   }
+`;
+
+export const Textarea = styled.textarea`
+  ${sharedStyles}
 `;

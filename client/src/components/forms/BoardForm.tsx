@@ -19,7 +19,10 @@ const BoardForm = ({ setShowFormModal }: Props) => {
           placeholder: 'e.g. Web Design',
         }}
       />
-      <DynamicInputField />
+      <DynamicInputField
+        label="Board Columns"
+        addRowBtnText="+ Add New Column"
+      />
       <ActionRow>
         <PrimaryBtn>Submit</PrimaryBtn>
         <PrimaryBtn

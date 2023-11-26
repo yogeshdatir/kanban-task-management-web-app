@@ -1,15 +1,15 @@
 import { Theme } from '@emotion/react';
-import { FieldLabel, Input } from './Form.styled';
+import { FieldLabel, Textarea } from './Form.styled';
 
-export type InputFieldProps = {
+type Props = {
   label?: string;
   fieldWrapperProps?: React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
   >;
-  inputProps?: React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
+  textareaProps?: React.DetailedHTMLProps<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
   >;
   labelProps?: {
     theme?: Theme | undefined;
@@ -20,20 +20,20 @@ export type InputFieldProps = {
   >;
 };
 
-const InputField = ({
+const TextareaField = ({
   label,
   fieldWrapperProps,
-  inputProps,
+  textareaProps,
   labelProps,
-}: InputFieldProps) => {
+}: Props) => {
   return (
     <div {...fieldWrapperProps}>
       <FieldLabel {...labelProps}>
         {label}
-        <Input {...inputProps} />
+        <Textarea {...textareaProps} />
       </FieldLabel>
     </div>
   );
 };
 
-export default InputField;
+export default TextareaField;
