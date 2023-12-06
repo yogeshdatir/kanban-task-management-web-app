@@ -33,7 +33,7 @@ const Content = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <ContentContainer>
-        {selectedBoard ? (
+        {selectedBoard && selectedBoard.columns.length ? (
           <BoardContainer>
             {selectedBoard.columns.map((column: TColumn) => {
               return <Column key={column.name} column={column} />;
