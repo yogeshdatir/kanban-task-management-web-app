@@ -45,7 +45,7 @@ const Content = () => {
         ) : (
           <EmptyStateContainer>
             <p>This board is empty. Create a new column to get started.</p>
-            <PrimaryBtn>+ Add New Task</PrimaryBtn>
+            <PrimaryBtn>+ Add New Column</PrimaryBtn>
           </EmptyStateContainer>
         )}
       </ContentContainer>
