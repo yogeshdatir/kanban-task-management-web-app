@@ -11,10 +11,10 @@ import { useState } from 'react';
 import { InputFieldProps } from './InputField';
 
 const DynamicRowComp = ({
-  updateColumnCounter,
+  updateInputCounter,
   inputProps,
 }: {
-  updateColumnCounter: (change: number) => void;
+  updateInputCounter: (change: number) => void;
   inputProps?: InputFieldProps['inputProps'];
 }) => {
   return (
@@ -22,7 +22,7 @@ const DynamicRowComp = ({
       <Input type="text" {...inputProps} />
       <CrossIcon
         style={{ cursor: 'pointer' }}
-        onClick={() => updateColumnCounter(-1)}
+        onClick={() => updateInputCounter(-1)}
       />
     </DynamicRow>
   );
@@ -32,16 +32,22 @@ type Props = {
   label?: string;
   allInputProps?: InputFieldProps['inputProps'][];
   addRowBtnText?: string;
+  commonOnChange?: (e: React.ChangeEvent, index: number) => void | undefined;
 };
 
-const DynamicInputField = ({ label, allInputProps, addRowBtnText }: Props) => {
-  const [columnCounter, setColumnCounter] = useState(1);
+const DynamicInputField = ({
+  label,
+  allInputProps,
+  addRowBtnText,
+  commonOnChange,
+}: Props) => {
+  const [inputCounter, setInputCounter] = useState(1);
 
-  const updateColumnCounter = (change: number) => {
-    if (change > 0) setColumnCounter((columnCounter) => columnCounter + change);
+  const updateInputCounter = (change: number) => {
+    if (change > 0) setInputCounter((inputCounter) => inputCounter + change);
     else {
-      columnCounter > 1 &&
-        setColumnCounter((columnCounter) => columnCounter + change);
+      inputCounter > 1 &&
+        setInputCounter((inputCounter) => inputCounter + change);
     }
   };
 
@@ -49,16 +55,24 @@ const DynamicInputField = ({ label, allInputProps, addRowBtnText }: Props) => {
     <DynamicInputFieldWrapper>
       <FieldLabel>{label}</FieldLabel>
       <DynamicRowsWrapper>
-        {[...Array(columnCounter)].map((_, index: number) => {
+        {[...Array(inputCounter)].map((_, index: number) => {
           return (
             <DynamicRowComp
               key={index}
-              updateColumnCounter={updateColumnCounter}
-              inputProps={allInputProps && allInputProps[index]}
+              updateInputCounter={updateInputCounter}
+              inputProps={Object.assign(
+                {},
+                {
+                  onChange: (e: React.ChangeEvent) => {
+                    commonOnChange && commonOnChange(e, index);
+                  },
+                },
+                allInputProps && allInputProps[index]
+              )}
             />
           );
         })}
-        <PrimaryBtn onClick={() => updateColumnCounter(1)}>
+        <PrimaryBtn onClick={() => updateInputCounter(1)}>
           {addRowBtnText}
         </PrimaryBtn>
       </DynamicRowsWrapper>

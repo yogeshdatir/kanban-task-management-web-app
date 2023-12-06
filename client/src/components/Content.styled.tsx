@@ -22,6 +22,7 @@ export const EmptyStateContainer = styled.div`
   align-items: center;
   gap: 32px;
   height: 100%;
+  width: 100%;
 `;
 
 export const NewColumn = styled(ColumnContainer)`

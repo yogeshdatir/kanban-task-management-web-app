@@ -33,7 +33,7 @@ const Content = () => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <ContentContainer>
-        {selectedBoard ? (
+        {selectedBoard && selectedBoard.columns.length ? (
           <BoardContainer>
             {selectedBoard.columns.map((column: TColumn) => {
               return <Column key={column.name} column={column} />;
@@ -45,7 +45,7 @@ const Content = () => {
         ) : (
           <EmptyStateContainer>
             <p>This board is empty. Create a new column to get started.</p>
-            <PrimaryBtn>+ Add New Task</PrimaryBtn>
+            <PrimaryBtn>+ Add New Column</PrimaryBtn>
           </EmptyStateContainer>
         )}
       </ContentContainer>
