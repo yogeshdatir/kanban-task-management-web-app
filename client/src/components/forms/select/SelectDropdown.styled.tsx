@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled';
 
-export const Dropdown = styled.div`
+export const SelectContainer = styled.div`
   width: 100%;
   position: relative;
   border-radius: 4px;
@@ -51,7 +51,7 @@ export const OptionsBox = styled.div<any>`
 
   position: absolute;
   top: 120%;
-  width: 100%;
+  min-width: 100%;
   overflow: auto;
 
   display: flex;
@@ -93,4 +93,20 @@ export const OptionItem = styled.option<any>`
     color: var(--White, #fff);
   }
   box-sizing: border-box;
+`;
+
+export const DropdownBox = styled(OptionsBox)`
+  right: 0;
+  top: 280%;
+  min-width: 192px;
+  gap: 1rem;
+`;
+
+export const DropdownIcon = styled(SelectBox)`
+  padding: 0 16px;
+  min-height: auto;
+`;
+
+export const DropdownMenuContainer = styled(SelectContainer)`
+  border: none;
 `;

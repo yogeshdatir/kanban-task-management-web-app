@@ -1,13 +1,12 @@
 import { useRef, useState } from 'react';
 import {
   ArrowIcon,
-  Dropdown,
+  SelectContainer,
   OptionItem,
   OptionsBox,
   SelectBox,
 } from './SelectDropdown.styled';
 import ArrowPng from '../../../../assets/icon-chevron-down.svg';
-// import ArrowPngLight from "../../assets/icons8-expand-arrow-50.png";
 import useClickOutside from '../../../hooks/useClickOutside';
 
 export interface IOption {
@@ -34,7 +33,7 @@ const Select = ({ selectedOption, setSelectedOption, options }: IProps) => {
   };
 
   return (
-    <Dropdown
+    <SelectContainer
       data-testid="select-container"
       ref={wrapperRef}
       onClick={handleDropdownClick}
@@ -57,7 +56,7 @@ const Select = ({ selectedOption, setSelectedOption, options }: IProps) => {
           );
         })}
       </OptionsBox>
-    </Dropdown>
+    </SelectContainer>
   );
 };
 

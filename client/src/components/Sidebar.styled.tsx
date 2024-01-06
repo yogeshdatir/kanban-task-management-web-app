@@ -7,6 +7,7 @@ export const SidebarContainer = styled.div`
   flex-direction: column;
   flex: 0 0 auto;
   background: var(--Dark-Grey, #2b2c37);
+  border-right: 1px solid var(--lines-dark, #3e3f4e);
 
   .logo-container {
     height: 96px;

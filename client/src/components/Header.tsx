@@ -5,6 +5,7 @@ import { AppState } from '../react-redux/store';
 import { useState } from 'react';
 import PopupModal from './PopupModal';
 import TaskForm from './forms/TaskForm';
+import DropdownMenu from './dropdownMenu/DropdownMenu';
 
 const Header = () => {
   const { selectedBoardName } = useSelector((state: AppState) => {
@@ -25,7 +26,13 @@ const Header = () => {
         + Add New Task
       </PrimaryBtn>
       <div className="dropdown-icon-wrapper">
-        <DropdownMenuIcon />
+        <DropdownMenu
+          dropdownMenu={<DropdownMenuIcon />}
+          options={[
+            { value: 'editBoard', displayValue: 'Edit Board' },
+            { value: 'deleteBoard', displayValue: 'Delete Board' },
+          ]}
+        />
       </div>
       {showFormModal && (
         <PopupModal>
