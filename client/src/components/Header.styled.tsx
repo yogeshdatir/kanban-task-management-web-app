@@ -6,9 +6,10 @@ export const HeaderContainer = styled.div`
   align-items: center;
   gap: 16px;
   padding: 0 16px;
+  background: var(--Dark-Grey, #2b2c37);
+  border-bottom: 1px solid var(--lines-dark, #3e3f4e);
 
   .dropdown-icon-wrapper {
-    padding: 0 8px;
     cursor: pointer;
     height: 20px;
   }
