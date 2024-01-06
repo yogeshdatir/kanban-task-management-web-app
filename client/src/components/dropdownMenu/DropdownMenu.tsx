@@ -13,11 +13,12 @@ export interface IOption {
 }
 
 interface IProps {
-  dropdownMenu: string | ReactElement;
+  dropdownMenuIcon: string | ReactElement;
   options: IOption[];
+  onChange?: (value: string | number) => void;
 }
 
-const DropdownMenu = ({ dropdownMenu, options }: IProps) => {
+const DropdownMenu = ({ dropdownMenuIcon, options, onChange }: IProps) => {
   const [isActive, setIsActive] = useState(false);
 
   const wrapperRef = useRef(null);
@@ -36,14 +37,16 @@ const DropdownMenu = ({ dropdownMenu, options }: IProps) => {
       onClick={handleDropdownClick}
     >
       <DropdownIcon data-testid="dropdownMenu-field">
-        {dropdownMenu}
+        {dropdownMenuIcon}
       </DropdownIcon>
       <DropdownBox data-testid="options-box" isActive={isActive}>
         {options?.map(({ value, displayValue }) => {
           return (
             <OptionItem
               key={value}
-              // onClick={() => setSelectedOption(value)}
+              onClick={() => {
+                onChange && onChange(value);
+              }}
               value={value}
             >
               {displayValue}

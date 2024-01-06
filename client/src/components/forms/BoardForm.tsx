@@ -1,23 +1,40 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PrimaryBtn } from '../Header.styled';
 import DynamicInputField from './DynamicInputField';
 import { ActionRow, FormContainer } from './Form.styled';
 import InputField from './InputField';
-import { addBoard, selectBoard } from '../../react-redux/boardSlice';
-import { useState } from 'react';
+import {
+  addBoard,
+  selectBoard,
+  updateBoard,
+} from '../../react-redux/boardSlice';
+import { useEffect, useState } from 'react';
 import { TBoard } from '../../types';
+import { AppState } from '../../react-redux/store';
 
 type Props = {
   setShowFormModal: React.Dispatch<React.SetStateAction<boolean>>;
+  isEdit?: boolean;
 };
 
-const BoardForm = ({ setShowFormModal }: Props) => {
+const BoardForm = ({ setShowFormModal, isEdit = false }: Props) => {
+  const { boards, selectedBoardName } = useSelector((state: AppState) => {
+    return state.boardsState;
+  });
+
   const dispatch = useDispatch();
 
   const [newBoard, setNewBoard] = useState<TBoard>({
     name: '',
     columns: [],
   });
+
+  useEffect(() => {
+    const selectedBoard: TBoard | undefined = boards.find(
+      (board: TBoard) => board.name === selectedBoardName
+    );
+    selectedBoard && isEdit && setNewBoard(selectedBoard);
+  }, [boards, isEdit, selectedBoardName]);
 
   const handleColumnDynamicInput = (
     e: React.ChangeEvent,
@@ -38,7 +55,7 @@ const BoardForm = ({ setShowFormModal }: Props) => {
 
   return (
     <FormContainer>
-      <p>Add new board</p>
+      <p>{isEdit ? `Edit board` : `Add new board`}</p>
       <InputField
         label="Board Name"
         inputProps={{
@@ -51,19 +68,26 @@ const BoardForm = ({ setShowFormModal }: Props) => {
               name: e.target.value,
             }));
           },
+          value: newBoard.name,
         }}
       />
       <DynamicInputField
         label="Board Columns"
         addRowBtnText="+ Add New Column"
         commonOnChange={handleColumnDynamicInput}
+        value={newBoard.columns}
       />
       <ActionRow>
         <PrimaryBtn
           onClick={() => {
-            console.log({ newBoard });
-            dispatch(addBoard(newBoard));
-            dispatch(selectBoard(newBoard.name));
+            console.log(newBoard);
+
+            if (isEdit) {
+              dispatch(updateBoard(newBoard));
+            } else {
+              dispatch(addBoard(newBoard));
+              dispatch(selectBoard(newBoard.name));
+            }
             setShowFormModal(false);
           }}
         >
