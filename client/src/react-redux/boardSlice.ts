@@ -28,6 +28,13 @@ const boardSlice = createSlice({
 
       return state;
     },
+    deleteBoard: (state, action) => {
+      state.boards = state.boards.filter(
+        (board) => board.name !== action.payload
+      );
+
+      return state;
+    },
     updateBoardList: (state, action) => {
       state.boards = action.payload;
       return state;
@@ -118,6 +125,7 @@ export const {
   addBoard,
   selectBoard,
   updateBoard,
+  deleteBoard,
   updateBoardList,
   updateTaskList,
 } = boardSlice.actions;

@@ -1,4 +1,4 @@
-import { ReactElement, useRef, useState } from 'react';
+import { CSSProperties, ReactElement, useRef, useState } from 'react';
 import useClickOutside from '../../hooks/useClickOutside';
 import {
   OptionItem,
@@ -10,6 +10,7 @@ import {
 export interface IOption {
   value: string | number;
   displayValue: string | number;
+  style?: CSSProperties;
 }
 
 interface IProps {
@@ -40,7 +41,7 @@ const DropdownMenu = ({ dropdownMenuIcon, options, onChange }: IProps) => {
         {dropdownMenuIcon}
       </DropdownIcon>
       <DropdownBox data-testid="options-box" isActive={isActive}>
-        {options?.map(({ value, displayValue }) => {
+        {options?.map(({ value, displayValue, style }) => {
           return (
             <OptionItem
               key={value}
@@ -48,6 +49,7 @@ const DropdownMenu = ({ dropdownMenuIcon, options, onChange }: IProps) => {
                 onChange && onChange(value);
               }}
               value={value}
+              style={style}
             >
               {displayValue}
             </OptionItem>
