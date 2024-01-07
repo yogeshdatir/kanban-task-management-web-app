@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ColumnContainer } from '../../components/Column.styled';
+import { ColumnContainer } from '../boards/Column.styled';
 
 export const ContentContainer = styled.div`
   display: flex;

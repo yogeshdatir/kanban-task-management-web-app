@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled';
 
+export const SelectFieldWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
 export const SelectContainer = styled.div`
   width: 100%;
   position: relative;

@@ -3,7 +3,7 @@ import { PrimaryBtn } from '../header/Header.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../react-redux/store';
 import { TBoard, TColumn } from '../../types';
-import Column from '../../components/Column';
+import Column from '../boards/Column';
 import { updateTaskList } from '../../react-redux/boardSlice';
 import { useState } from 'react';
 import PopupModal from '../../components/PopupModal';

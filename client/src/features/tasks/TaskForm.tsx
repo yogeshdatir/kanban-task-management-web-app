@@ -58,6 +58,7 @@ const TaskForm = ({ setShowFormModal }: Props) => {
             displayValue: 'done',
           },
         ]}
+        label="Status"
       />
       <ActionRow>
         <PrimaryBtn>Submit</PrimaryBtn>
