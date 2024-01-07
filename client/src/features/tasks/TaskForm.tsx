@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { PrimaryBtn } from '../Header.styled';
-import DynamicInputField from './DynamicInputField';
-import { ActionRow, FormContainer } from './Form.styled';
-import InputField from './InputField';
-import TextareaField from './TextareaField';
-import Select from './select/SelectDropdown';
+import { PrimaryBtn } from '../header/Header.styled';
+import DynamicInputField from '../../components/forms/DynamicInputField';
+import { ActionRow, FormContainer } from '../../components/forms/Form.styled';
+import InputField from '../../components/forms/InputField';
+import TextareaField from '../../components/forms/TextareaField';
+import Select from '../../components/forms/select/SelectDropdown';
 
 type Props = {
   setShowFormModal: (prevState: boolean) => void;

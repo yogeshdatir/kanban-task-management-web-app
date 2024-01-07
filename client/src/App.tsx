@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { DashboardContainer, RightContainer } from './App.styled';
-import Content from './components/Content';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+import Content from './features/content/Content';
+import Header from './features/header/Header';
+import Sidebar from './features/sidebar/Sidebar';
 import { AppState } from './react-redux/store';
 
 const App = () => {

@@ -1,12 +1,12 @@
-import { SidebarContainer } from './Sidebar.styled';
-import KanBanLogo from '../../assets/logo-light.svg?react';
+import KanBanLogo from '../../../assets/logo-light.svg?react';
 import { useDispatch, useSelector } from 'react-redux';
-import { TBoard } from '../types';
-import { AppState } from '../react-redux/store';
-import { selectBoard } from '../react-redux/boardSlice';
+import { TBoard } from '../../types';
+import { AppState } from '../../react-redux/store';
+import { selectBoard } from '../../react-redux/boardSlice';
 import { useState } from 'react';
-import PopupModal from './PopupModal';
-import BoardForm from './forms/BoardForm';
+import PopupModal from '../../components/PopupModal';
+import BoardForm from '../boards/BoardForm';
+import { SidebarContainer } from './Sidebar.styled';
 
 const Sidebar = () => {
   const { boards, selectedBoardName } = useSelector((state: AppState) => {

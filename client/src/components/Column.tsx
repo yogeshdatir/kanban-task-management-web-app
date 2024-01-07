@@ -1,7 +1,7 @@
 import { Droppable, DroppableProvided } from '@hello-pangea/dnd';
 import { TColumn, TTask } from '../types';
 import { ColumnContainer, ColumnTitle, TaskList } from './Column.styled';
-import Task from './Task';
+import Task from '../features/tasks/Task';
 
 type Props = {
   column: TColumn;
