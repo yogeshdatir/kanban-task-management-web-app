@@ -1,21 +1,23 @@
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { DashboardContainer, RightContainer } from './App.styled';
 import Content from './components/Content';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
-import store from './react-redux/store';
+import { AppState } from './react-redux/store';
 
 const App = () => {
+  const { boards } = useSelector((state: AppState) => {
+    return state.boardsState;
+  });
+
   return (
-    <Provider store={store}>
-      <DashboardContainer>
-        <Sidebar />
-        <RightContainer>
-          <Header />
-          <Content />
-        </RightContainer>
-      </DashboardContainer>
-    </Provider>
+    <DashboardContainer>
+      <Sidebar />
+      <RightContainer>
+        {!!boards.length && <Header />}
+        <Content />
+      </RightContainer>
+    </DashboardContainer>
   );
 };
 

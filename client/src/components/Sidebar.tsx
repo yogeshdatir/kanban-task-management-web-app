@@ -14,7 +14,7 @@ const Sidebar = () => {
   });
   const dispatch = useDispatch();
 
-  const [showFormModal, setShowFormModal] = useState<boolean>(false);
+  const [showBoardFormModal, setShowBoardFormModal] = useState<boolean>(false);
 
   return (
     <SidebarContainer>
@@ -41,15 +41,15 @@ const Sidebar = () => {
         <a
           className="menu-action-button"
           onClick={() => {
-            setShowFormModal(true);
+            setShowBoardFormModal(true);
           }}
         >
           + Create New Board
         </a>
       </div>
-      {showFormModal && (
+      {showBoardFormModal && (
         <PopupModal>
-          <BoardForm setShowFormModal={setShowFormModal} />
+          <BoardForm setShowBoardFormModal={setShowBoardFormModal} />
         </PopupModal>
       )}
     </SidebarContainer>
