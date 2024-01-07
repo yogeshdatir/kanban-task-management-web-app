@@ -7,15 +7,18 @@ import PopupModal from './PopupModal';
 import TaskForm from './forms/TaskForm';
 import DropdownMenu from './dropdownMenu/DropdownMenu';
 import BoardForm from './forms/BoardForm';
-import { deleteBoard } from '../react-redux/boardSlice';
+import { deleteBoard, selectBoard } from '../react-redux/boardSlice';
+import ConfirmationModal from './forms/ConfirmationModal';
+import { TBoard } from '../types';
 
 const Header = () => {
-  const { selectedBoardName } = useSelector((state: AppState) => {
+  const { boards, selectedBoardName } = useSelector((state: AppState) => {
     return state.boardsState;
   });
 
   const [showTaskFormModal, setShowTaskFormModal] = useState<boolean>(false);
   const [showBoardFormModal, setShowBoardFormModal] = useState<boolean>(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -48,7 +51,7 @@ const Header = () => {
                 break;
 
               case 'deleteBoard':
-                dispatch(deleteBoard(selectedBoardName));
+                setShowConfirmationModal(true);
                 break;
 
               default:
@@ -64,8 +67,30 @@ const Header = () => {
       )}
       {showBoardFormModal && (
         <PopupModal>
-          <BoardForm setShowFormModal={setShowBoardFormModal} isEdit={true} />
+          <BoardForm
+            setShowBoardFormModal={setShowBoardFormModal}
+            isEdit={true}
+          />
         </PopupModal>
+      )}
+      {showConfirmationModal && (
+        <ConfirmationModal
+          setShowConfirmationModal={setShowConfirmationModal}
+          onConfirm={() => {
+            let nextBoardIndex = boards.findIndex((board: TBoard) => {
+              return board.name === selectedBoardName;
+            });
+            if (nextBoardIndex === boards.length - 1) {
+              nextBoardIndex = nextBoardIndex - 1;
+            } else {
+              nextBoardIndex = nextBoardIndex + 1;
+            }
+            dispatch(
+              selectBoard(nextBoardIndex < 0 ? '' : boards[nextBoardIndex].name)
+            );
+            dispatch(deleteBoard(selectedBoardName));
+          }}
+        />
       )}
     </HeaderContainer>
   );

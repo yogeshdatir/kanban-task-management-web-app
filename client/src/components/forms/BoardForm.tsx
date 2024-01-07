@@ -13,11 +13,11 @@ import { TBoard } from '../../types';
 import { AppState } from '../../react-redux/store';
 
 type Props = {
-  setShowFormModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowBoardFormModal: React.Dispatch<React.SetStateAction<boolean>>;
   isEdit?: boolean;
 };
 
-const BoardForm = ({ setShowFormModal, isEdit = false }: Props) => {
+const BoardForm = ({ setShowBoardFormModal, isEdit = false }: Props) => {
   const { boards, selectedBoardName } = useSelector((state: AppState) => {
     return state.boardsState;
   });
@@ -88,14 +88,14 @@ const BoardForm = ({ setShowFormModal, isEdit = false }: Props) => {
               dispatch(addBoard(newBoard));
               dispatch(selectBoard(newBoard.name));
             }
-            setShowFormModal(false);
+            setShowBoardFormModal(false);
           }}
         >
           Submit
         </PrimaryBtn>
         <PrimaryBtn
           onClick={() => {
-            setShowFormModal(false);
+            setShowBoardFormModal(false);
           }}
         >
           Cancel

@@ -19,7 +19,7 @@ export const ModalContainer = styled.div`
   padding: 2rem;
   border-radius: 6px;
   background: var(--Dark-Grey, #2b2c37);
-  min-width: 480px;
+  width: 480px;
   max-height: 90vh;
   overflow: auto;
 `;
