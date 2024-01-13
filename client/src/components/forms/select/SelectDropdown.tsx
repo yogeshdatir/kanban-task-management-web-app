@@ -18,7 +18,8 @@ export interface IOption {
 
 interface IProps {
   selectedOption: string | number;
-  setSelectedOption: any;
+  setSelectedOption?: React.Dispatch<React.SetStateAction<any>>;
+  onChange?: (event: React.MouseEvent<HTMLOptionElement>) => void;
   options: IOption[];
   label?: string;
 }
@@ -26,6 +27,7 @@ interface IProps {
 const Select = ({
   selectedOption,
   setSelectedOption,
+  onChange,
   options,
   label,
 }: IProps) => {
@@ -57,7 +59,11 @@ const Select = ({
             return (
               <OptionItem
                 key={value}
-                onClick={() => setSelectedOption(value)}
+                onClick={(e: React.MouseEvent<HTMLOptionElement>) => {
+                  onChange
+                    ? onChange(e)
+                    : setSelectedOption && setSelectedOption(value);
+                }}
                 value={value}
                 selectedOption={value === selectedOption}
               >
