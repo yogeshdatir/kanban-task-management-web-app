@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TBoard, TBoards, TColumn } from '../types';
+import { TBoard, TBoards, TColumn, TTask } from '../types';
 import dummyBoards from '../../data.json';
 import { DropResult } from '@hello-pangea/dnd';
 
@@ -118,6 +118,64 @@ const boardSlice = createSlice({
         }
       }
     },
+    updateTask: (state, action) => {
+      let updatedBoardIndex = -1,
+        prevColumnIndex = -1,
+        updatedColumnIndex = -1,
+        prevTaskIndex = -1;
+
+      state.boards.forEach((board: TBoard, index: number) => {
+        if (board.name === state.selectedBoardName) {
+          updatedBoardIndex = index;
+          board.columns.forEach((column: TColumn, index: number) => {
+            if (
+              column.name.toLowerCase() ===
+              action.payload.newTask.status.toLowerCase()
+            ) {
+              updatedColumnIndex = index;
+            }
+            if (
+              column.name.toLowerCase() ===
+              action.payload.oldTask.status.toLowerCase()
+            ) {
+              prevColumnIndex = index;
+              column.tasks.forEach((task: TTask, index: number) => {
+                if (task.title === action.payload.oldTask.title) {
+                  prevTaskIndex = index;
+                  return;
+                }
+              });
+            }
+          });
+        }
+      });
+
+      if (
+        updatedBoardIndex > -1 &&
+        updatedColumnIndex > -1 &&
+        prevColumnIndex > -1 &&
+        prevTaskIndex > -1
+      ) {
+        if (updatedColumnIndex === prevColumnIndex) {
+          state.boards[updatedBoardIndex].columns[prevColumnIndex].tasks.splice(
+            prevTaskIndex,
+            1,
+            action.payload.newTask
+          );
+        } else {
+          state.boards[updatedBoardIndex].columns[prevColumnIndex].tasks.splice(
+            prevTaskIndex,
+            1
+          );
+
+          state.boards[updatedBoardIndex].columns[
+            updatedColumnIndex
+          ].tasks.push(action.payload.newTask);
+        }
+      }
+
+      return state;
+    },
   },
 });
 
@@ -128,6 +186,7 @@ export const {
   deleteBoard,
   updateBoardList,
   updateTaskList,
+  updateTask,
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

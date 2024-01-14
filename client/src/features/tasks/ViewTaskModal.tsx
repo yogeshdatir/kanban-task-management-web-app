@@ -5,6 +5,8 @@ import { FormContainer } from '../../components/forms/Form.styled';
 import Select from '../../components/forms/select/SelectDropdown';
 import useClickOutside from '../../hooks/useClickOutside';
 import { TSubtask, TTask } from '../../types';
+import { useDispatch } from 'react-redux';
+import { updateTask } from '../../react-redux/boardSlice';
 
 type Props = {
   task: TTask | null;
@@ -18,6 +20,8 @@ const ViewTaskModal = ({
   setShowViewTaskModal,
 }: Props) => {
   const [localTaskCopy, setLocalTaskCopy] = useState<TTask | null>(task);
+
+  const dispatch = useDispatch();
 
   const wrapperRef = useRef(null);
   useClickOutside(wrapperRef, () => {
@@ -34,10 +38,17 @@ const ViewTaskModal = ({
   const handleTaskStatusChange = (e: React.MouseEvent<HTMLOptionElement>) => {
     const target = e.target as HTMLInputElement;
     // OR (event.target as HTMLInputElement).value
-    setLocalTaskCopy(
-      (prevTask: TTask | null) =>
-        prevTask && { ...prevTask, status: target.value }
-    );
+    setLocalTaskCopy((prevTask: TTask | null) => {
+      return prevTask && { ...prevTask, status: target.value };
+    });
+
+    localTaskCopy &&
+      dispatch(
+        updateTask({
+          newTask: { ...localTaskCopy, status: target.value },
+          oldTask: localTaskCopy,
+        })
+      );
   };
 
   const handleSubTaskStatusChange = (
@@ -57,6 +68,23 @@ const ViewTaskModal = ({
         ? { ...prevTask, subtasks: updatedSubtaskList }
         : null;
     });
+
+    const updatedSubtaskList = localTaskCopy?.subtasks.map(
+      (subTask: TSubtask) => {
+        if (subTask.title === subTaskTitle) {
+          return { ...subTask, isCompleted: e.target.checked };
+        } else {
+          return subTask;
+        }
+      }
+    );
+
+    dispatch(
+      updateTask({
+        newTask: { ...localTaskCopy, subtasks: updatedSubtaskList },
+        oldTask: localTaskCopy,
+      })
+    );
   };
 
   return (
