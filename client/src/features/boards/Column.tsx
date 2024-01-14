@@ -39,7 +39,9 @@ const Column = ({ column }: Props) => {
       </Droppable>
       {showViewTaskModal && (
         <ViewTaskModal
+          // ? Difference between passing the task object and task id/title is that the modal won't update entire task object is changed
           task={selectedTask}
+          column={column}
           showViewTaskModal={showViewTaskModal}
           setShowViewTaskModal={setShowViewTaskModal}
         />

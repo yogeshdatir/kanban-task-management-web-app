@@ -120,9 +120,8 @@ const boardSlice = createSlice({
     },
     updateTask: (state, action) => {
       let updatedBoardIndex = -1,
-        prevColumnIndex = -1,
         updatedColumnIndex = -1,
-        prevTaskIndex = -1;
+        updatedTaskIndex = -1;
 
       state.boards.forEach((board: TBoard, index: number) => {
         if (board.name === state.selectedBoardName) {
@@ -130,48 +129,30 @@ const boardSlice = createSlice({
           board.columns.forEach((column: TColumn, index: number) => {
             if (
               column.name.toLowerCase() ===
-              action.payload.newTask.status.toLowerCase()
+              action.payload.column.name.toLowerCase()
             ) {
               updatedColumnIndex = index;
-            }
-            if (
-              column.name.toLowerCase() ===
-              action.payload.oldTask.status.toLowerCase()
-            ) {
-              prevColumnIndex = index;
-              column.tasks.forEach((task: TTask, index: number) => {
-                if (task.title === action.payload.oldTask.title) {
-                  prevTaskIndex = index;
-                  return;
-                }
-              });
+              if (
+                column.name.toLowerCase() ===
+                action.payload.column.name.toLowerCase()
+              ) {
+                updatedColumnIndex = index;
+                column.tasks.forEach((task: TTask, index: number) => {
+                  if (task.title === action.payload.newTask.title) {
+                    updatedTaskIndex = index;
+                    return;
+                  }
+                });
+              }
             }
           });
         }
       });
 
-      if (
-        updatedBoardIndex > -1 &&
-        updatedColumnIndex > -1 &&
-        prevColumnIndex > -1 &&
-        prevTaskIndex > -1
-      ) {
-        if (updatedColumnIndex === prevColumnIndex) {
-          state.boards[updatedBoardIndex].columns[prevColumnIndex].tasks.splice(
-            prevTaskIndex,
-            1,
-            action.payload.newTask
-          );
-        } else {
-          state.boards[updatedBoardIndex].columns[prevColumnIndex].tasks.splice(
-            prevTaskIndex,
-            1
-          );
-
-          state.boards[updatedBoardIndex].columns[
-            updatedColumnIndex
-          ].tasks.push(action.payload.newTask);
-        }
+      if (updatedBoardIndex > -1 && updatedColumnIndex > -1) {
+        state.boards[updatedBoardIndex].columns[updatedColumnIndex].tasks[
+          updatedTaskIndex
+        ] = action.payload.newTask;
       }
 
       return state;

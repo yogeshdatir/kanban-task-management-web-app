@@ -4,18 +4,20 @@ import SubtaskList from '../../components/SubtaskList';
 import { FormContainer } from '../../components/forms/Form.styled';
 import Select from '../../components/forms/select/SelectDropdown';
 import useClickOutside from '../../hooks/useClickOutside';
-import { TSubtask, TTask } from '../../types';
+import { TColumn, TSubtask, TTask } from '../../types';
 import { useDispatch } from 'react-redux';
 import { updateTask } from '../../react-redux/boardSlice';
 
 type Props = {
   task: TTask | null;
+  column: TColumn;
   showViewTaskModal: boolean;
   setShowViewTaskModal: (prevState: boolean) => void;
 };
 
 const ViewTaskModal = ({
   task,
+  column,
   showViewTaskModal,
   setShowViewTaskModal,
 }: Props) => {
@@ -46,7 +48,7 @@ const ViewTaskModal = ({
       dispatch(
         updateTask({
           newTask: { ...localTaskCopy, status: target.value },
-          oldTask: localTaskCopy,
+          column,
         })
       );
   };
@@ -82,7 +84,7 @@ const ViewTaskModal = ({
     dispatch(
       updateTask({
         newTask: { ...localTaskCopy, subtasks: updatedSubtaskList },
-        oldTask: localTaskCopy,
+        column,
       })
     );
   };
