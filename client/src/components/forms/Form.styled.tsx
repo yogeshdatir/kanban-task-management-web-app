@@ -7,6 +7,12 @@ export const FormContainer = styled.div`
   gap: 1.5rem;
 `;
 
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
 export const FieldLabel = styled.label`
   display: flex;
   overflow: hidden;

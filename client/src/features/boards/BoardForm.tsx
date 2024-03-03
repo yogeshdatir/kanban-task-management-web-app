@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { PrimaryBtn } from '../Header.styled';
-import DynamicInputField from './DynamicInputField';
-import { ActionRow, FormContainer } from './Form.styled';
-import InputField from './InputField';
+import { PrimaryBtn } from '../header/Header.styled';
+import DynamicInputField from '../../components/forms/DynamicInputField';
+import { ActionRow, FormContainer } from '../../components/forms/Form.styled';
+import InputField from '../../components/forms/InputField';
 import {
   addBoard,
   selectBoard,

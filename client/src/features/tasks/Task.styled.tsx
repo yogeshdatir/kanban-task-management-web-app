@@ -11,6 +11,11 @@ export const TaskContainer = styled.div`
   cursor: pointer;
 `;
 
+export const ViewTaskHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const TaskTitle = styled.p``;
 
 export const SubTaskDetails = styled.div``;

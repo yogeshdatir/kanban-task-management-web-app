@@ -1,19 +1,19 @@
 import { DragDropContext, DropResult } from '@hello-pangea/dnd';
-import {
-  BoardContainer,
-  ContentContainer,
-  EmptyStateContainer,
-  NewColumn,
-} from './Content.styled';
-import { PrimaryBtn } from './Header.styled';
+import { PrimaryBtn } from '../header/Header.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../react-redux/store';
-import { TBoard, TColumn } from '../types';
-import Column from './Column';
-import { updateTaskList } from '../react-redux/boardSlice';
+import { AppState } from '../../react-redux/store';
+import { TBoard, TColumn } from '../../types';
+import Column from '../boards/Column';
+import { updateTaskList } from '../../react-redux/boardSlice';
 import { useState } from 'react';
-import PopupModal from './PopupModal';
-import BoardForm from './forms/BoardForm';
+import PopupModal from '../../components/PopupModal';
+import BoardForm from '../boards/BoardForm';
+import {
+  ContentContainer,
+  BoardContainer,
+  NewColumn,
+  EmptyStateContainer,
+} from './Content.styled';
 
 const Content = () => {
   const { boards, selectedBoardName } = useSelector((state: AppState) => {

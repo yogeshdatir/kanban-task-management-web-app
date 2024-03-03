@@ -6,10 +6,10 @@ import {
   Input,
 } from './Form.styled';
 import CrossIcon from '../../../assets/icon-cross.svg?react';
-import { PrimaryBtn } from '../Header.styled';
+import { PrimaryBtn } from '../../features/header/Header.styled';
 import { useEffect, useState } from 'react';
 import { InputFieldProps } from './InputField';
-import { TColumn } from '../../types';
+import { TColumn, TSubtask } from '../../types';
 
 const DynamicRowComp = ({
   updateInputCounter,
@@ -34,7 +34,9 @@ type Props = {
   allInputProps?: InputFieldProps['inputProps'][];
   addRowBtnText?: string;
   commonOnChange?: (e: React.ChangeEvent, index: number) => void | undefined;
-  value?: TColumn[];
+  /* TODO: Union type is not working here. Look for a solution. */
+  // value?: TColumn[] | TSubtask[];
+  value?: any;
 };
 
 const DynamicInputField = ({
@@ -63,6 +65,13 @@ const DynamicInputField = ({
       <FieldLabel>{label}</FieldLabel>
       <DynamicRowsWrapper>
         {[...Array(inputCounter)].map((_, index: number) => {
+
+          let valueToBeUpdated = ''
+          if(value && value[index]) {
+            if("name" in value[index]) valueToBeUpdated = value[index].name
+            else if("title" in value[index]) valueToBeUpdated = value[index].title
+          }
+
           return (
             <DynamicRowComp
               key={index}
@@ -73,12 +82,12 @@ const DynamicInputField = ({
                   onChange: (e: React.ChangeEvent) => {
                     commonOnChange && commonOnChange(e, index);
                   },
-                  value:
+                  value:valueToBeUpdated,
                     // Added these chain of condition to avoid react error:
                     /**Warning: A component is changing an uncontrolled input to be controlled. This is likely caused by the value changing from undefined to a defined value, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. */
-                    value && value[index] && value[index].name
-                      ? value[index].name
-                      : '',
+                    // value && value[index] && value[index].name
+                    //   ? value[index].name
+                    //   : '',
                 },
                 allInputProps && allInputProps[index]
               )}

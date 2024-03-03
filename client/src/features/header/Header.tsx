@@ -1,15 +1,15 @@
-import { HeaderContainer, PrimaryBtn } from './Header.styled';
-import DropdownMenuIcon from '../../assets/icon-vertical-ellipsis.svg?react';
+import DropdownMenuIcon from '../../../assets/icon-vertical-ellipsis.svg?react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from '../react-redux/store';
+import { AppState } from '../../react-redux/store';
 import { useState } from 'react';
-import PopupModal from './PopupModal';
-import TaskForm from './forms/TaskForm';
-import DropdownMenu from './dropdownMenu/DropdownMenu';
-import BoardForm from './forms/BoardForm';
-import { deleteBoard, selectBoard } from '../react-redux/boardSlice';
-import ConfirmationModal from './forms/ConfirmationModal';
-import { TBoard } from '../types';
+import PopupModal from '../../components/PopupModal';
+import TaskForm from '../tasks/TaskForm';
+import DropdownMenu from '../../components/dropdownMenu/DropdownMenu';
+import BoardForm from '../boards/BoardForm';
+import { deleteBoard, selectBoard } from '../../react-redux/boardSlice';
+import ConfirmationModal from '../../components/forms/ConfirmationModal';
+import { TBoard } from '../../types';
+import { HeaderContainer, PrimaryBtn } from './Header.styled';
 
 const Header = () => {
   const { boards, selectedBoardName } = useSelector((state: AppState) => {

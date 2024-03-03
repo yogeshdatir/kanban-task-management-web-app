@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { TBoard, TBoards, TColumn } from '../types';
+import { Slice, createSlice } from '@reduxjs/toolkit';
+import { TBoard, TBoards, TColumn, TTask } from '../types';
 import dummyBoards from '../../data.json';
 import { DropResult } from '@hello-pangea/dnd';
 
@@ -8,7 +8,7 @@ const initialState: TBoards = {
   selectedBoardName: dummyBoards.boards[0].name,
 };
 
-const boardSlice = createSlice({
+const boardSlice: Slice = createSlice({
   name: 'board',
   initialState,
   reducers: {
@@ -22,7 +22,7 @@ const boardSlice = createSlice({
     },
     updateBoard: (state, action) => {
       const updatedBoardIndex = state.boards.findIndex(
-        (board) => board.name === action.payload.name
+        (board: TBoard) => board.name === action.payload.name
       );
       state.boards[updatedBoardIndex] = action.payload;
 
@@ -30,7 +30,7 @@ const boardSlice = createSlice({
     },
     deleteBoard: (state, action) => {
       state.boards = state.boards.filter(
-        (board) => board.name !== action.payload
+        (board: TBoard) => board.name !== action.payload
       );
 
       return state;
@@ -118,6 +118,100 @@ const boardSlice = createSlice({
         }
       }
     },
+    updateTask: (state, action) => {
+      let updatedBoardIndex = -1,
+        updatedColumnIndex = -1,
+        updatedTaskIndex = -1;
+
+      state.boards.forEach((board: TBoard, index: number) => {
+        if (board.name === state.selectedBoardName) {
+          updatedBoardIndex = index;
+          board.columns.forEach((column: TColumn, index: number) => {
+            if (
+              column.name.toLowerCase() ===
+              action.payload.column.name.toLowerCase()
+            ) {
+              updatedColumnIndex = index;
+              if (
+                column.name.toLowerCase() ===
+                action.payload.column.name.toLowerCase()
+              ) {
+                updatedColumnIndex = index;
+                column.tasks.forEach((task: TTask, index: number) => {
+                  if (task.title === action.payload.newTask.title) {
+                    updatedTaskIndex = index;
+                    return;
+                  }
+                });
+              }
+            }
+          });
+        }
+      });
+
+      if (updatedBoardIndex > -1 && updatedColumnIndex > -1) {
+        state.boards[updatedBoardIndex].columns[updatedColumnIndex].tasks[
+          updatedTaskIndex
+        ] = action.payload.newTask;
+      }
+
+      return state;
+    },
+    addTask: (state, action) => {
+      let updatedBoardIndex = -1;
+      const updatedColumnIndex = 0;
+
+      state.boards.forEach((board: TBoard, index: number) => {
+        if (board.name === state.selectedBoardName) {
+          updatedBoardIndex = index;
+        }
+      });
+
+      if (updatedBoardIndex > -1 && updatedColumnIndex > -1) {
+        state.boards[updatedBoardIndex].columns[updatedColumnIndex].tasks.push(
+          action.payload
+        );
+      }
+
+      return state;
+    },
+    deleteTask: (state, action) => {
+      let updatedBoardIndex = -1,
+        updatedColumnIndex = -1,
+        deletedTaskIndex = -1;
+
+      state.boards.forEach((board: TBoard, index: number) => {
+        if (board.name === state.selectedBoardName) {
+          updatedBoardIndex = index;
+          board.columns.forEach((column: TColumn, index: number) => {
+            if (
+              column.name.toLowerCase() ===
+              action.payload.column.name.toLowerCase()
+            ) {
+              updatedColumnIndex = index;
+              if (
+                column.name.toLowerCase() ===
+                action.payload.column.name.toLowerCase()
+              ) {
+                updatedColumnIndex = index;
+                column.tasks.forEach((task: TTask, index: number) => {
+                  if (task.title === action.payload.task.title) {
+                    deletedTaskIndex = index;
+                    return;
+                  }
+                });
+              }
+            }
+          });
+        }
+      });
+
+      if (updatedBoardIndex > -1 && updatedColumnIndex > -1 && updatedColumnIndex > -1) {
+        state.boards[updatedBoardIndex].columns[updatedColumnIndex].tasks.splice(deletedTaskIndex, 1)
+      }
+
+      return state;
+    }
   },
 });
 
@@ -128,6 +222,9 @@ export const {
   deleteBoard,
   updateBoardList,
   updateTaskList,
+  updateTask,
+  addTask,
+  deleteTask
 } = boardSlice.actions;
 
 export default boardSlice.reducer;
