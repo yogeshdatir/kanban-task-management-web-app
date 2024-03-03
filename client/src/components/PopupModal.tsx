@@ -24,17 +24,6 @@ const PopupModal = forwardRef(
       document.body.appendChild(mount);
     }
 
-    const el = document.createElement('div');
-
-    useEffect(() => {
-      mount?.appendChild(el);
-      return () => {
-        mount?.removeChild(el);
-      };
-    }, [el, mount]);
-
-    if (!mount) return null;
-
     return ReactDOM.createPortal(
       <Overlay>
         <ModalContainer ref={ref}>{children}</ModalContainer>

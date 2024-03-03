@@ -10,8 +10,8 @@ import InputField from '../../components/forms/InputField';
 import TextareaField from '../../components/forms/TextareaField';
 import Select from '../../components/forms/select/SelectDropdown';
 import { useDispatch } from 'react-redux';
-import { TTask } from '../../types';
-import { addTask } from '../../react-redux/boardSlice';
+import { TColumn, TTask } from '../../types';
+import { addTask, updateTask } from '../../react-redux/boardSlice';
 
 const EMPTY_TASK: TTask = {
   title: '',
@@ -22,11 +22,14 @@ const EMPTY_TASK: TTask = {
 
 type Props = {
   setShowFormModal: (prevState: boolean) => void;
-  task?: TTask;
+  task?: TTask | null;
+  column?: TColumn;
 };
 
-const TaskForm = ({ setShowFormModal, task }: Props) => {
-  const [localTaskCopy, setLocalTaskCopy] = useState<TTask>(task ? task : EMPTY_TASK);
+const TaskForm = ({ setShowFormModal, task, column }: Props) => {
+  const [localTaskCopy, setLocalTaskCopy] = useState<TTask>(
+    task ? task : EMPTY_TASK
+  );
 
   const dispatch = useDispatch();
 
@@ -66,7 +69,15 @@ const TaskForm = ({ setShowFormModal, task }: Props) => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log({ localTaskCopy });
-    dispatch(addTask(localTaskCopy));
+
+    if (task)
+      dispatch(
+        updateTask({
+          newTask: localTaskCopy,
+          column,
+        })
+      );
+    else dispatch(addTask(localTaskCopy));
     setShowFormModal(false);
   };
 
@@ -94,7 +105,6 @@ const TaskForm = ({ setShowFormModal, task }: Props) => {
             name: 'description',
             value: localTaskCopy.description,
             onChange: handleInputChange,
-            required: true,
           }}
         />
         <DynamicInputField

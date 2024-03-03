@@ -7,12 +7,17 @@ import useClickOutside from '../../hooks/useClickOutside';
 import { TColumn, TSubtask, TTask } from '../../types';
 import { useDispatch } from 'react-redux';
 import { updateTask } from '../../react-redux/boardSlice';
+import DropdownMenuIcon from '../../../assets/icon-vertical-ellipsis.svg?react';
+import DropdownMenu from '../../components/dropdownMenu/DropdownMenu';
+import { ViewTaskHeader } from './Task.styled';
 
 type Props = {
   task: TTask | null;
   column: TColumn;
   showViewTaskModal: boolean;
   setShowViewTaskModal: (prevState: boolean) => void;
+  setShowTaskFormModal: (prevState: boolean) => void;
+  setShowConfirmationModal: (prevState: boolean) => void;
 };
 
 const ViewTaskModal = ({
@@ -20,6 +25,8 @@ const ViewTaskModal = ({
   column,
   showViewTaskModal,
   setShowViewTaskModal,
+  setShowTaskFormModal,
+  setShowConfirmationModal,
 }: Props) => {
   const [localTaskCopy, setLocalTaskCopy] = useState<TTask | null>(task);
 
@@ -92,7 +99,37 @@ const ViewTaskModal = ({
   return (
     <PopupModal ref={wrapperRef}>
       <FormContainer>
-        <p>{task?.title}</p>
+        <ViewTaskHeader>
+          <p>{task?.title}</p>
+          <div className="dropdown-icon-wrapper">
+            <DropdownMenu
+              dropdownMenuIcon={<DropdownMenuIcon />}
+              options={[
+                { value: 'editTask', displayValue: 'Edit Task' },
+                {
+                  value: 'deleteTask',
+                  displayValue: 'Delete Task',
+                  style: { color: '#EA5555' },
+                },
+              ]}
+              onChange={(value) => {
+                switch (value) {
+                  case 'editTask':
+                    setShowTaskFormModal(true);
+                    setShowViewTaskModal(false);
+                    break;
+
+                  case 'deleteTask':
+                    setShowConfirmationModal(true);
+                    break;
+
+                  default:
+                    break;
+                }
+              }}
+            />
+          </div>
+        </ViewTaskHeader>
         <p>{task?.description}</p>
         <p>{`Subtasks (${completedSubTaskCount} of ${subTaskCount})`}</p>
         <SubtaskList

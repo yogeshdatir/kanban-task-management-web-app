@@ -4,14 +4,26 @@ import Task from '../tasks/Task';
 import { ColumnContainer, ColumnTitle, TaskList } from './Column.styled';
 import { useState } from 'react';
 import ViewTaskModal from '../tasks/ViewTaskModal';
+import PopupModal from '../../components/PopupModal';
+import TaskForm from '../tasks/TaskForm';
+import ConfirmationModal from '../../components/forms/ConfirmationModal';
+import { deleteTask } from '../../react-redux/boardSlice';
+import { useDispatch } from 'react-redux';
 
 type Props = {
   column: TColumn;
 };
 
+// TODO: Handle cancel actions for all task forms
+
 const Column = ({ column }: Props) => {
   const [selectedTask, setSelectedTask] = useState<TTask | null>(null);
   const [showViewTaskModal, setShowViewTaskModal] = useState(false);
+  const [showTaskFormModal, setShowTaskFormModal] = useState<boolean>(false);
+  const [showConfirmationModal, setShowConfirmationModal] =
+    useState<boolean>(false);
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -44,6 +56,26 @@ const Column = ({ column }: Props) => {
           column={column}
           showViewTaskModal={showViewTaskModal}
           setShowViewTaskModal={setShowViewTaskModal}
+          setShowTaskFormModal={setShowTaskFormModal}
+          setShowConfirmationModal={setShowConfirmationModal}
+        />
+      )}
+      {showTaskFormModal && (
+        <PopupModal>
+          <TaskForm
+            setShowFormModal={setShowTaskFormModal}
+            task={selectedTask}
+            column={column}
+          />
+        </PopupModal>
+      )}
+      {showConfirmationModal && (
+        <ConfirmationModal
+          setShowConfirmationModal={setShowConfirmationModal}
+          onConfirm={() => {
+            setShowViewTaskModal(false);
+            dispatch(deleteTask({ task: selectedTask, column }));
+          }}
         />
       )}
     </>
