@@ -157,6 +157,24 @@ const boardSlice = createSlice({
 
       return state;
     },
+    addTask: (state, action) => {
+      let updatedBoardIndex = -1;
+      const updatedColumnIndex = 0;
+
+      state.boards.forEach((board: TBoard, index: number) => {
+        if (board.name === state.selectedBoardName) {
+          updatedBoardIndex = index;
+        }
+      });
+
+      if (updatedBoardIndex > -1 && updatedColumnIndex > -1) {
+        state.boards[updatedBoardIndex].columns[updatedColumnIndex].tasks.push(
+          action.payload
+        );
+      }
+
+      return state;
+    },
   },
 });
 
@@ -168,6 +186,7 @@ export const {
   updateBoardList,
   updateTaskList,
   updateTask,
+  addTask
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

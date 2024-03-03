@@ -22,6 +22,7 @@ interface IProps {
   onChange?: (event: React.MouseEvent<HTMLOptionElement>) => void;
   options: IOption[];
   label?: string;
+  required?: boolean;
 }
 
 const Select = ({
@@ -30,6 +31,7 @@ const Select = ({
   onChange,
   options,
   label,
+  required,
 }: IProps) => {
   const [isActive, setIsActive] = useState(false);
 
