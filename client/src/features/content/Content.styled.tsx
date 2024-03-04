@@ -36,4 +36,12 @@ export const NewColumn = styled(ColumnContainer)`
   margin-top: 48px;
   align-items: center;
   justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+
+  :hover {
+    color: hsl(242, 48%, 58%);
+  }
 `;

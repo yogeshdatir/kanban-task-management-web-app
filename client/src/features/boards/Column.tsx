@@ -1,7 +1,7 @@
 import { Droppable, DroppableProvided } from '@hello-pangea/dnd';
 import { TColumn, TTask } from '../../types';
 import Task from '../tasks/Task';
-import { ColumnContainer, ColumnTitle, TaskList } from './Column.styled';
+import { Circle, ColumnContainer, ColumnTitle, TaskList } from './Column.styled';
 import { useState } from 'react';
 import ViewTaskModal from '../tasks/ViewTaskModal';
 import PopupModal from '../../components/PopupModal';
@@ -12,11 +12,19 @@ import { useDispatch } from 'react-redux';
 
 type Props = {
   column: TColumn;
+  index: number;
+  columnCount: number;
 };
+
+const makeColor = (colorNum: number, colors: number) => {
+  if (colors < 1) colors = 1;
+  // defaults to one color - avoid divide by zero
+  return colorNum * (360 / colors) % 360;
+}
 
 // TODO: Handle cancel actions for all task forms
 
-const Column = ({ column }: Props) => {
+const Column = ({ column, index, columnCount }: Props) => {
   const [selectedTask, setSelectedTask] = useState<TTask | null>(null);
   const [showViewTaskModal, setShowViewTaskModal] = useState(false);
   const [showTaskFormModal, setShowTaskFormModal] = useState<boolean>(false);
@@ -30,7 +38,7 @@ const Column = ({ column }: Props) => {
       <Droppable droppableId={column.name}>
         {(provided: DroppableProvided) => (
           <ColumnContainer>
-            <ColumnTitle>{`${column.name} (${column.tasks.length})`}</ColumnTitle>
+            <ColumnTitle><Circle style={{backgroundColor: `hsla( ${makeColor(index + 1, columnCount)}, 100%, 50%, 70%)`}} />{`${column.name} (${column.tasks.length})`}</ColumnTitle>
             <TaskList ref={provided.innerRef} {...provided.droppableProps}>
               {column.tasks.map((task: TTask, index: number) => (
                 <Task

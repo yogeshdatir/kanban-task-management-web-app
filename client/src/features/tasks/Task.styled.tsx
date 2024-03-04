@@ -14,8 +14,19 @@ export const TaskContainer = styled.div`
 export const ViewTaskHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
-export const TaskTitle = styled.p``;
+export const TaskTitle = styled.p`
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+`;
 
-export const SubTaskDetails = styled.div``;
+export const SubTaskDetails = styled.div`
+  font-size: 12px;
+  font-weight: bold;
+  color: #828fa3;
+`;

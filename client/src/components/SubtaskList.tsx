@@ -2,6 +2,7 @@ import { TSubtask } from '../types';
 import { List } from './SubtaskList.styled';
 
 type Props = {
+  label: string;
   list: TSubtask[];
   handleSubTaskStatusChange: (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -9,9 +10,10 @@ type Props = {
   ) => void;
 };
 
-const SubtaskList = ({ list, handleSubTaskStatusChange }: Props) => {
+const SubtaskList = ({ label, list, handleSubTaskStatusChange }: Props) => {
   return (
     <List>
+      <p>{label}</p>
       {list.map((subTask: TSubtask) => (
         <label key={subTask.title}>
           <input
@@ -20,7 +22,7 @@ const SubtaskList = ({ list, handleSubTaskStatusChange }: Props) => {
             checked={subTask.isCompleted}
             onChange={(e) => handleSubTaskStatusChange(e, subTask.title)}
           />
-          <span>{subTask.title}</span>
+          <p className={subTask.isCompleted ? 'completed' : ''}>{subTask.title}</p>
         </label>
       ))}
     </List>

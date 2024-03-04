@@ -30,8 +30,7 @@ const Select = ({
   setSelectedOption,
   onChange,
   options,
-  label,
-  required,
+  label
 }: IProps) => {
   const [isActive, setIsActive] = useState(false);
 

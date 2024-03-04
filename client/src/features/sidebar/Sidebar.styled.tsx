@@ -38,15 +38,30 @@ export const SidebarContainer = styled.div`
     padding: 15px 0 15px 32px;
     cursor: pointer;
     border-radius: 0px 100px 100px 0px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+    color: #828fa3;
 
     :hover:not(&.selected) {
       border-radius: 0px 100px 100px 0px;
       background: var(--White, #fff);
       color: var(--Main-Purple, #635fc7);
+
+      path {
+        fill: var(--Main-Purple, #635fc7);
+      }
     }
 
     &.selected {
       background: var(--Main-Purple, #635fc7);
+      color: #fff;
+
+      path {
+        fill: #fff;
+      }
     }
 
     transition: all 0.2s ease-in-out;
@@ -57,14 +72,18 @@ export const SidebarContainer = styled.div`
     background-color: transparent;
     border: none;
     cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 
     color: var(--Main-Purple, #635fc7);
-    font-feature-settings: 'clig' off, 'liga' off;
+
+    path {
+      fill: var(--Main-Purple, #635fc7);
+    }
 
     /* Heading (M) */
     font-size: 15px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
   }
 `;

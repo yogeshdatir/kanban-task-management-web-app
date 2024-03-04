@@ -5,6 +5,13 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  .description {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.77;
+    color: hsl(216, 15%, 57%);
+  }
 `;
 
 export const Form = styled.form`
@@ -28,6 +35,10 @@ const sharedStyles = css`
   background: var(--Dark-Grey, #2b2c37);
   padding: 0.5rem 1rem;
   width: 100%;
+
+  :hover {
+    border: solid 1px hsl(242, 48%, 58%);
+  }
 `;
 
 export const Input = styled.input`

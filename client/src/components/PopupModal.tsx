@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { ModalContainer, Overlay } from './PopupModal.styled';
-import { LegacyRef, ReactNode, forwardRef, useEffect } from 'react';
+import { LegacyRef, ReactNode, forwardRef } from 'react';
 
 /*
   TODO: Create a how-to document for modal/popup/tooltip creation, usePopupModal hook.
