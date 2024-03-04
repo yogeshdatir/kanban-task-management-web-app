@@ -42,8 +42,8 @@ const Content = () => {
         <ContentContainer>
           {selectedBoard && selectedBoard.columns.length ? (
             <BoardContainer>
-              {selectedBoard.columns.map((column: TColumn) => {
-                return <Column key={column.name} column={column} />;
+              {selectedBoard.columns.map((column: TColumn, index: number) => {
+                return <Column key={column.name} column={column} index={index} columnCount={selectedBoard.columns.length}/>;
               })}
               <NewColumn
                 onClick={() => {

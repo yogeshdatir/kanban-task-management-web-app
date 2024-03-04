@@ -9,7 +9,6 @@ import CrossIcon from '../../../assets/icon-cross.svg?react';
 import { PrimaryBtn } from '../../features/header/Header.styled';
 import { useEffect, useState } from 'react';
 import { InputFieldProps } from './InputField';
-import { TColumn, TSubtask } from '../../types';
 
 const DynamicRowComp = ({
   updateInputCounter,

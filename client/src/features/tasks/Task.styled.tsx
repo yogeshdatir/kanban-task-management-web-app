@@ -19,6 +19,14 @@ export const ViewTaskHeader = styled.div`
   font-weight: bold;
 `;
 
-export const TaskTitle = styled.p``;
+export const TaskTitle = styled.p`
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+`;
 
-export const SubTaskDetails = styled.div``;
+export const SubTaskDetails = styled.div`
+  font-size: 12px;
+  font-weight: bold;
+  color: #828fa3;
+`;

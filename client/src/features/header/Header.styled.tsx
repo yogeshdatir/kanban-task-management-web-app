@@ -9,6 +9,11 @@ export const HeaderContainer = styled.div`
   background: var(--Dark-Grey, #2b2c37);
   border-bottom: 1px solid var(--lines-dark, #3e3f4e);
 
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
   .dropdown-icon-wrapper {
     cursor: pointer;
     height: 20px;
@@ -19,6 +24,8 @@ export const PrimaryBtn = styled.button`
   padding: 15px 24px;
   border: none;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
 
   border-radius: 24px;
   background: var(--Main-Purple, #635fc7);

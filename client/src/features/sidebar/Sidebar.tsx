@@ -1,4 +1,5 @@
 import KanBanLogo from '../../../assets/logo-light.svg?react';
+import BoardIcon from '../../../assets/icon-board.svg?react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TBoard } from '../../types';
 import { AppState } from '../../react-redux/store';
@@ -34,7 +35,7 @@ const Sidebar = () => {
                 dispatch(selectBoard(board.name));
               }}
             >
-              {board.name}
+              <BoardIcon />{board.name}
             </a>
           );
         })}
@@ -44,7 +45,7 @@ const Sidebar = () => {
             setShowBoardFormModal(true);
           }}
         >
-          + Create New Board
+          <BoardIcon /> + Create New Board
         </a>
       </div>
       {showBoardFormModal && (

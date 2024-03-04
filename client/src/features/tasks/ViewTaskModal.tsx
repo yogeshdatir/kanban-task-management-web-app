@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import PopupModal from '../../components/PopupModal';
 import SubtaskList from '../../components/SubtaskList';
 import { FormContainer } from '../../components/forms/Form.styled';
@@ -38,10 +38,13 @@ const ViewTaskModal = ({
   });
 
   const subTaskCount = task?.subtasks.length || 0;
-  const completedSubTaskCount = localTaskCopy?.subtasks.reduce((sum: number, subTask: TSubtask) => {
+  const completedSubTaskCount = localTaskCopy?.subtasks.reduce(
+    (sum: number, subTask: TSubtask) => {
       if (subTask.isCompleted) return sum + 1;
       return sum;
-    }, 0);
+    },
+    0
+  );
 
   const handleTaskStatusChange = (e: React.MouseEvent<HTMLOptionElement>) => {
     const target = e.target as HTMLInputElement;
@@ -129,12 +132,16 @@ const ViewTaskModal = ({
             />
           </div>
         </ViewTaskHeader>
-        <p className='description'>{task?.description}</p>
-        <p>{`Subtasks (${completedSubTaskCount} of ${subTaskCount})`}</p>
-        <SubtaskList
-          list={localTaskCopy?.subtasks || []}
-          handleSubTaskStatusChange={handleSubTaskStatusChange}
-        />
+        {task?.description && (
+          <p className="description">{task?.description}</p>
+        )}
+        <div>
+          <SubtaskList
+            label={`Subtasks (${completedSubTaskCount} of ${subTaskCount})`}
+            list={localTaskCopy?.subtasks || []}
+            handleSubTaskStatusChange={handleSubTaskStatusChange}
+          />
+        </div>
         <Select
           selectedOption={localTaskCopy?.status || ''}
           onChange={handleTaskStatusChange}
