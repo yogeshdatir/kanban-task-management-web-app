@@ -25,6 +25,10 @@ export const SelectContainer = styled.div`
   @media (max-width: 480px) {
     margin-top: 20px;
   }
+
+  :hover {
+    border: solid 1px hsl(242, 48%, 58%);
+  }
 `;
 
 export const SelectBox = styled.div<any>`
@@ -115,4 +119,7 @@ export const DropdownIcon = styled(SelectBox)`
 
 export const DropdownMenuContainer = styled(SelectContainer)`
   border: none;
+  :hover {
+    border: none;
+  }
 `;

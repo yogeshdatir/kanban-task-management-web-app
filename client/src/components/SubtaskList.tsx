@@ -20,7 +20,7 @@ const SubtaskList = ({ list, handleSubTaskStatusChange }: Props) => {
             checked={subTask.isCompleted}
             onChange={(e) => handleSubTaskStatusChange(e, subTask.title)}
           />
-          <span>{subTask.title}</span>
+          <p className={subTask.isCompleted ? 'completed' : ''}>{subTask.title}</p>
         </label>
       ))}
     </List>

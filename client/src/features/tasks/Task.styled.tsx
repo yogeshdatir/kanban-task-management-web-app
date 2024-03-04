@@ -14,6 +14,9 @@ export const TaskContainer = styled.div`
 export const ViewTaskHeader = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 export const TaskTitle = styled.p``;

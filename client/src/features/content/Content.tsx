@@ -21,6 +21,7 @@ const Content = () => {
   });
 
   const [showBoardFormModal, setShowBoardFormModal] = useState<boolean>(false);
+  const [editBoard, setEditBoard] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -44,7 +45,12 @@ const Content = () => {
               {selectedBoard.columns.map((column: TColumn) => {
                 return <Column key={column.name} column={column} />;
               })}
-              <NewColumn>
+              <NewColumn
+                onClick={() => {
+                  setEditBoard(true);
+                  setShowBoardFormModal(true);
+                }}
+              >
                 <p>+ New Column</p>
               </NewColumn>
             </BoardContainer>
@@ -69,7 +75,10 @@ const Content = () => {
 
       {showBoardFormModal && (
         <PopupModal>
-          <BoardForm setShowBoardFormModal={setShowBoardFormModal} />
+          <BoardForm
+            setShowBoardFormModal={setShowBoardFormModal}
+            isEdit={editBoard}
+          />
         </PopupModal>
       )}
     </>
