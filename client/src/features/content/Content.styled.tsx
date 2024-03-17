@@ -45,3 +45,21 @@ export const NewColumn = styled(ColumnContainer)`
     color: hsl(242, 48%, 58%);
   }
 `;
+
+export const ShowSidebarFloater = styled.button<any>`
+  position: absolute;
+  left: 0;
+  bottom: 2rem;
+  height: 3rem;
+  width: ${({ showSidebar }: any) => (showSidebar ? '0' : '3.5rem')};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--Main-Purple, #635fc7);
+  border-radius: 0px 100px 100px 0px;
+  transition: width 400ms;
+
+  :hover {
+    background: var(--main-purple-hover, #a8a4ff);
+  }
+`;

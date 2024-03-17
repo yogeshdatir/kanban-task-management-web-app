@@ -1,5 +1,6 @@
 import KanBanLogo from '../../../assets/logo-light.svg?react';
 import BoardIcon from '../../../assets/icon-board.svg?react';
+import HideSidebarIcon from '../../../assets/icon-hide-sidebar.svg?react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TBoard } from '../../types';
 import { AppState } from '../../react-redux/store';
@@ -9,7 +10,12 @@ import PopupModal from '../../components/PopupModal';
 import BoardForm from '../boards/BoardForm';
 import { SidebarContainer } from './Sidebar.styled';
 
-const Sidebar = () => {
+type Props = {
+  showSidebar: boolean;
+  setShowSidebar: (showSidebar: boolean) => void;
+};
+
+const Sidebar = ({ showSidebar, setShowSidebar }: Props) => {
   const { boards, selectedBoardName } = useSelector((state: AppState) => {
     return state.boardsState;
   });
@@ -18,7 +24,7 @@ const Sidebar = () => {
   const [showBoardFormModal, setShowBoardFormModal] = useState<boolean>(false);
 
   return (
-    <SidebarContainer>
+    <SidebarContainer showSidebar={showSidebar}>
       <div className="logo-container">
         <KanBanLogo />
       </div>
@@ -35,7 +41,8 @@ const Sidebar = () => {
                 dispatch(selectBoard(board.name));
               }}
             >
-              <BoardIcon />{board.name}
+              <BoardIcon />
+              <span>{board.name}</span>
             </a>
           );
         })}
@@ -45,7 +52,15 @@ const Sidebar = () => {
             setShowBoardFormModal(true);
           }}
         >
-          <BoardIcon /> + Create New Board
+          <BoardIcon /> <span>+ Create New Board</span>
+        </a>
+        <a
+          className="footer-item"
+          onClick={() => {
+            setShowSidebar(false);
+          }}
+        >
+          <HideSidebarIcon /> <span>Hide Sidebar</span>
         </a>
       </div>
       {showBoardFormModal && (
