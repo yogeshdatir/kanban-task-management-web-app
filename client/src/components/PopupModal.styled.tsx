@@ -11,7 +11,7 @@ export const Overlay = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 `;
 
 export const ModalContainer = styled.div`

@@ -13,9 +13,16 @@ import {
   BoardContainer,
   NewColumn,
   EmptyStateContainer,
+  ShowSidebarFloater,
 } from './Content.styled';
+import ShowSidebarIcon from '../../../assets/icon-show-sidebar.svg?react';
 
-const Content = () => {
+type Props = {
+  showSidebar: boolean;
+  setShowSidebar: (showSidebar: boolean) => void;
+};
+
+const Content = ({ showSidebar, setShowSidebar }: Props) => {
   const { boards, selectedBoardName } = useSelector((state: AppState) => {
     return state.boardsState;
   });
@@ -43,7 +50,14 @@ const Content = () => {
           {selectedBoard && selectedBoard.columns.length ? (
             <BoardContainer>
               {selectedBoard.columns.map((column: TColumn, index: number) => {
-                return <Column key={column.name} column={column} index={index} columnCount={selectedBoard.columns.length}/>;
+                return (
+                  <Column
+                    key={column.name}
+                    column={column}
+                    index={index}
+                    columnCount={selectedBoard.columns.length}
+                  />
+                );
               })}
               <NewColumn
                 onClick={() => {
@@ -72,6 +86,15 @@ const Content = () => {
           )}
         </ContentContainer>
       </DragDropContext>
+
+      <ShowSidebarFloater
+        showSidebar={showSidebar}
+        onClick={() => {
+          setShowSidebar(true);
+        }}
+      >
+        <ShowSidebarIcon />
+      </ShowSidebarFloater>
 
       {showBoardFormModal && (
         <PopupModal>

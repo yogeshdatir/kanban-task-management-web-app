@@ -1,25 +1,35 @@
 import styled from '@emotion/styled';
 
-export const SidebarContainer = styled.div`
-  width: 21%;
+const LOGO_CONT_HEIGHT = '96px';
+
+export const SidebarContainer = styled.div<any>`
+  width: ${({ showSidebar }: any) => (showSidebar ? '21%' : '0')};
+  transition: width 400ms;
+  overflow: hidden;
   height: 100%;
   display: flex;
   flex-direction: column;
-  flex: 0 0 auto;
   background: var(--Dark-Grey, #2b2c37);
   border-right: 1px solid var(--lines-dark, #3e3f4e);
 
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .logo-container {
-    height: 96px;
+    height: ${LOGO_CONT_HEIGHT};
     padding-left: 32px;
     display: flex;
     align-items: center;
   }
 
   .menu-container {
-    padding: 15px 24px 15px 0;
+    padding: 15px 24px 2rem 0;
     display: flex;
     flex-direction: column;
+    height: calc(100% - ${LOGO_CONT_HEIGHT});
   }
 
   .menu-header {
@@ -34,8 +44,10 @@ export const SidebarContainer = styled.div`
     letter-spacing: 2.4px;
   }
 
-  .menu-item {
-    padding: 15px 0 15px 32px;
+  .menu-item,
+  .footer-item {
+    padding-left: 32px;
+    height: 3rem;
     cursor: pointer;
     border-radius: 0px 100px 100px 0px;
     display: flex;
@@ -65,6 +77,10 @@ export const SidebarContainer = styled.div`
     }
 
     transition: all 0.2s ease-in-out;
+  }
+
+  .footer-item {
+    margin-top: auto;
   }
 
   .menu-action-button {
